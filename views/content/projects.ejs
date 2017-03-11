@@ -1,0 +1,40 @@
+<!-- Author: Adil Hussain
+Student Number: 300777642
+COMP308 Assignment 1
+HTML, CSS, Javascript
+Page: Projects -->
+<% include ../partials/header.ejs %>
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <h1><%= title %></h1>
+          <div class="logo">
+            <img src="/Images/centennialcollegelogo.jpg" height= "250" width="250">
+            <div class="imagetext">
+              <p>Centennial College</p>
+            </div>
+          </div>
+          <p>Here are all the Major Projects I have worked on:</p>
+          <hr>
+          <h3>Centennial Meetup Application</h3>
+          <p>This project was part of our Software Development Project course in the fifth semester. The focus of the application was to provide
+          international students a way to find friends at Centennial College. The Application conisisted of the User interface, an online MySQL server for information storage,
+          a login and registration system and an in app text messaging system. The API calls were done in Python for all the transactions to and from the MySQL server.</p>
+          <hr>
+          <h3>Music E-commerce Website</h3>
+          <p>The project was part of our web development course in our 3rd semester. The website was run locally with SQL server for storage. The main highlights of the website
+          indluded: A mini music player to preview songs, a paypal payment system, Information storage in SQL server and ASP.NET.
+          <hr>
+          <h3>Centennial College Registration System</h3>
+          <p> This is the current project that im working on and we are in early stages on development at the time. The idea is to completely revamp the current registration system
+          for Centennial College as it has some clear issues for students that have already registered for courses and students who are off the model route. This resulting in long queues
+          for multiple departments for fixing issues related to timetable and registration</p>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="footer">
+    &copy; 2017 Adil_Hussain_300777642 
+    </div>
+<% include ../partials/footer.ejs %>
