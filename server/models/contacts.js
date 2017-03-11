@@ -2,9 +2,9 @@ let mongoose = require('mongoose');
 
 // create a model class
 let contactsSchema = mongoose.Schema({
-    name: String,
-    rating: Number,
-    cost: Number
+    Name: String,
+    Phone:Number,
+    Email:String
 },
 {
   collection: "contacts"
