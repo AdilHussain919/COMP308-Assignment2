@@ -28,7 +28,7 @@ db.once('open', () => {
 
 // define routers
 let index = require('./routes/index'); // top level routes
-let games = require('./routes/contacts'); // routes for contacts
+let contacts = require('./routes/contacts'); // routes for contacts
 
 let app = express();
 
