@@ -1,3 +1,4 @@
+// modules
 let express = require('express');
 let path = require('path'); // part of node.js core
 let favicon = require('serve-favicon');
@@ -5,7 +6,29 @@ let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
-let index = require('./routes/index');
+// modules for authentication
+let session = require('express-session');
+let passport = require('passport');
+let passportlocal = require('passport-local');
+let LocalStrategy = passportlocal.Strategy;
+let flash = require('connect-flash'); // displays errors / login messages
+
+// import "mongoose" - required for DB Access
+let mongoose = require('mongoose');
+// URI
+let config = require('./config/db');
+
+mongoose.connect(process.env.URI || config.URI);
+
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log("Conneced to MongoDB...");
+});
+
+// define routers
+let index = require('./routes/index'); // top level routes
+let games = require('./routes/contacts'); // routes for contacts
 
 let app = express();
 
@@ -21,7 +44,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// setup session
+app.use(session({
+  secret: "SomeSecret",
+  saveUninitialized: true,
+  resave: true
+}));
+
+// initialize passport and flash
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+// route redirects
 app.use('/', index);
+app.use('/contacts', contacts);
+
+// Passport User Configuration
+let UserModel = require('./models/users');
+let User = UserModel.User; // alias for the User Model - User object
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
