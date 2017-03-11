@@ -10,4 +10,4 @@ let contactsSchema = mongoose.Schema({
   collection: "contacts"
 });
 
-module.exports = mongoose.model('contacts', gamesSchema);
+module.exports = mongoose.model('contacts', contactsSchema);
